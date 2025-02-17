@@ -28,7 +28,7 @@ export default async function ProfilePage() {
                     </div>
                 </div>
             </section>
-            <AuthPageInvisible />
+            {/* <AuthPageInvisible /> */}
         </>
     );
 }

@@ -39,18 +39,11 @@ export default function RegisterForm() {
         store.setRequestLoading(true);
         try {
             const res = await apiRegisterUser(JSON.stringify(credentials));
-            console.log("res=====>>>>>>", res);
-            if (res.data.success) {
+            if (res.success) {
                 return router.push("/login");
             }
-        } catch (error: any) {
-            console.log("errorrrrrrrrrrrr register", error);
-            if (error instanceof Error) {
-                // handleApiError(error);
-            } else {
-                toast.error(error.message);
-                console.log("Error message:", error.message);
-            }
+        } catch (error: unknown) {
+            toast.error(error as string);
         } finally {
             store.setRequestLoading(false);
         }

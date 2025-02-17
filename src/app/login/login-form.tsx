@@ -37,20 +37,14 @@ export default function LoginForm() {
         try {
             const res = await apiLoginUser(JSON.stringify(credentials));
 
-            console.log("res===>>>>", res);
             if (res.success) {
                 toast.success(res.message);
                 store.setAuthUser(res?.data?.user);
                 return router.push("/profile");
             }
-        } catch (error: any) {
-            console.log("errorrrrrrrrrrrr login", error);
-            if (error instanceof Error) {
-                // handleApiError(error);
-            } else {
-                toast.error(error.message);
-                console.log("Error message:", error.message);
-            }
+        } catch (error: unknown) {
+            toast.error(error as string);
+
         } finally {
             store.setRequestLoading(false);
         }
@@ -69,11 +63,11 @@ export default function LoginForm() {
                 <FormInput label="Email" name="email" type="email" />
                 <FormInput label="Password" name="password" type="password" />
 
-                <div className="text-right">
+                {/* <div className="text-right">
                     <Link href="#" className="">
                         Forgot Password?
                     </Link>
-                </div>
+                </div> */}
                 <LoadingButton
                     loading={store.requestLoading}
                     textColor="text-ct-blue-600"

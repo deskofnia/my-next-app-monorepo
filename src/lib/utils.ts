@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
 
 export function stringToObjectId(id: string): mongoose.Types.ObjectId | null {
   if (mongoose.Types.ObjectId.isValid(id)) {
@@ -14,8 +15,8 @@ export function createErrorResponse(
   statusCode: number
 ): NextResponse {
   const errorResponse = {
-    status: statusCode >= 500 ? "error" : "fail",
     message,
+    success: false,
   };
 
   return new NextResponse(JSON.stringify(errorResponse), {
@@ -24,7 +25,6 @@ export function createErrorResponse(
   });
 }
 
-import bcrypt from "bcryptjs";
 
 // Hash password
 export async function hashPassword(password: string): Promise<string> {
