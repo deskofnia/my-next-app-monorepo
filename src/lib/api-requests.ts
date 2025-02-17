@@ -54,23 +54,6 @@ export async function apiLoginUser(credentials: string): Promise<ApiResponse> {
   return handleResponse<ApiResponse>(response);
 }
 
-export async function apiGetTodos(token?: string): Promise<ApiResponse> {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-  const response = await fetch(`${SERVER_ENDPOINT}/api/todos`, {
-    method: "GET",
-    credentials: "include",
-    headers,
-  });
-
-  return handleResponse<ApiResponse>(response);
-}
-
 export async function apiGetAuthUser(token?: string): Promise<FilteredUser> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
